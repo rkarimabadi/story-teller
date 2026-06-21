@@ -1,0 +1,31 @@
+﻿@using StoryTeller.UI.Application
+@if (Prompt != null)
+{
+    <div class="prompt-display card">
+        <div class="prompt-items">
+            <div class="prompt-item archetype">
+                <span class="label">کهن‌الگو</span>
+                <span class="value">@Prompt.Archetype</span>
+            </div>
+            <div class="prompt-arrow">←</div>
+            <div class="prompt-item situation">
+                <span class="label">موقعیت</span>
+                <span class="value">@Prompt.Situation</span>
+            </div>
+            <div class="prompt-arrow">←</div>
+            <div class="prompt-item twist">
+                <span class="label">پیچش</span>
+                <span class="value">@Prompt.Twist</span>
+            </div>
+        </div>
+        <div class="prompt-story">
+            <p>«@Prompt.Archetype» در «@Prompt.Situation» و ناگهان «@Prompt.Twist»...</p>
+        </div>
+        <button class="btn btn-primary" @onclick="OnRegenerate">🎲 جرقه جدید</button>
+    </div>
+}
+
+@code {
+    [Parameter] public PromptTripletDto? Prompt { get; set; }
+    [Parameter] public EventCallback OnRegenerate { get; set; }
+}

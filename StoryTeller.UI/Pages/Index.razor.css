@@ -1,0 +1,51 @@
+﻿.hero {
+    padding: 2rem 0 1rem 0;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: none;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #636e72;
+    font-weight: 300;
+}
+
+.empty-state {
+    padding: 4rem 2rem;
+}
+
+.btn-large {
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    border-radius: 60px;
+}
+
+.loading-spinner {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    padding: 3rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.actions {
+    margin-top: 2rem;
+}

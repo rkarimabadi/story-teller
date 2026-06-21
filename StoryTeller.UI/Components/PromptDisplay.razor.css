@@ -1,0 +1,119 @@
+﻿.prompt-display {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 2px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+    .prompt-display::before {
+        content: "✨";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: 8rem;
+        opacity: 0.05;
+        transform: rotate(15deg);
+    }
+
+.prompt-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.prompt-item {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+    .prompt-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(108, 92, 231, 0.15);
+    }
+
+    .prompt-item .label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.25rem;
+    }
+
+    .prompt-item .value {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: var(--dark-color);
+    }
+
+    .prompt-item.archetype .value {
+        color: #6C5CE7;
+    }
+
+    .prompt-item.situation .value {
+        color: #00B894;
+    }
+
+    .prompt-item.twist .value {
+        color: #E17055;
+    }
+
+.prompt-arrow {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    font-weight: 300;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.prompt-story {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(108, 92, 231, 0.05);
+    border-radius: 16px;
+    border-right: 4px solid var(--primary-color);
+}
+
+    .prompt-story p {
+        font-size: 1.1rem;
+        line-height: 2;
+        color: var(--dark-color);
+        font-weight: 400;
+    }
+
+        .prompt-story p::before {
+            content: "✍️ ";
+            font-size: 1.2rem;
+        }
+
+@media (max-width: 768px) {
+    .prompt-items {
+        flex-direction: column;
+    }
+
+    .prompt-arrow {
+        transform: rotate(90deg);
+    }
+}

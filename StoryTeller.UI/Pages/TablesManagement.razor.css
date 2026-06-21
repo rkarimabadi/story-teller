@@ -1,0 +1,20 @@
+﻿.page-header {
+    padding: 1rem 0;
+    border-bottom: 2px solid #eee;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+    .page-header h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin: 0;
+    }
+
+.loading-state {
+    padding: 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}

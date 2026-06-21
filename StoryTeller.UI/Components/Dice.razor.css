@@ -1,0 +1,84 @@
+﻿.dice-container {
+    width: 80px;
+    height: 80px;
+    perspective: 600px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.dice {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+    border: 2px solid #e0e0e0;
+}
+
+.dice-container:hover .dice {
+    transform: scale(1.05) rotateY(10deg);
+}
+
+.dice-container.rolling .dice {
+    animation: diceRoll 0.8s ease-in-out;
+}
+
+@keyframes diceRoll {
+    0% {
+        transform: rotateX(0) rotateY(0) scale(1);
+    }
+
+    25% {
+        transform: rotateX(720deg) rotateY(360deg) scale(1.2);
+    }
+
+    50% {
+        transform: rotateX(1440deg) rotateY(720deg) scale(0.9);
+    }
+
+    75% {
+        transform: rotateX(2160deg) rotateY(1080deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotateX(2880deg) rotateY(1440deg) scale(1);
+    }
+}
+
+.dice-face {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.dice-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0 rgba(108, 92, 231, 0.2);
+}
+
+.dice-container.rolling .dice-number {
+    animation: blink 0.1s infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}

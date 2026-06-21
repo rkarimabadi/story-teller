@@ -1,0 +1,65 @@
+﻿@page "/"
+@using StoryTeller.UI.Application
+@using StoryTeller.UI.Components
+@inject IMediator Mediator
+
+<div class="container">
+    <div class="hero text-center">
+        <h1 class="main-title">🎲 یک کلمه، یک جهان</h1>
+        <p class="subtitle">جرقه‌ی داستان بعدی‌ات را با سه تاس بینداز</p>
+    </div>
+
+    @if (IsLoading)
+    {
+        <div class="loading-spinner">⏳ در حال چرخش تاس‌ها...</div>
+    }
+    else if (CurrentPrompt != null)
+    {
+        <PromptDisplay Prompt="@CurrentPrompt" OnRegenerate="GeneratePrompt" />
+    }
+    else
+    {
+        <div class="empty-state text-center">
+            <p>برای شروع، دکمه‌ی زیر را بزن</p>
+            <button class="btn btn-primary btn-large" @onclick="GeneratePrompt">
+                🎲 جرقه بزن!
+            </button>
+        </div>
+    }
+
+    <div class="actions mt-3 flex flex-center gap-1 flex-wrap">
+        <button class="btn btn-secondary" @onclick="GeneratePrompt">
+            🔄 جرقه جدید
+        </button>
+        <NavLink class="btn btn-secondary" href="/tables">
+            📋 مدیریت جداول
+        </NavLink>
+    </div>
+</div>
+
+@code {
+    private PromptTripletDto? CurrentPrompt = null;
+    private bool IsLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GeneratePrompt();
+    }
+
+    private async Task GeneratePrompt()
+    {
+        IsLoading = true;
+        try
+        {
+            var query = new GeneratePromptQuery();
+            CurrentPrompt = await Mediator.Send(query);
+        }
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+}

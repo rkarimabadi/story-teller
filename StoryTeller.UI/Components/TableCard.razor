@@ -1,0 +1,96 @@
+﻿
+<div class="table-card card">
+    <div class="table-header">
+        <h3>@Title</h3>
+        <span class="badge">@TypeName</span>
+    </div>
+
+    @if (IsEditing)
+    {
+        <div class="edit-mode">
+            <div class="items-list">
+                @for (int i = 0; i < EditingItems.Count; i++)
+                {
+                    var index = i;
+                    <div class="item-row" key="@index">
+                        <span class="item-index">@(index + 1)</span>
+                        <input value="@EditingItems[index]"
+                               @oninput="(e) => UpdateItem(index, e.Value?.ToString() ?? string.Empty)"
+                               class="item-input"
+                               placeholder="متن مورد..." />
+                    </div>
+                }
+            </div>
+            <div class="edit-actions">
+                <button class="btn btn-success" @onclick="SaveChanges">✅ ذخیره</button>
+                <button class="btn btn-secondary" @onclick="CancelEdit">❌ انصراف</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <ul class="items-list-display">
+            @foreach (var item in Items)
+            {
+                <li>@item</li>
+            }
+        </ul>
+        <div class="card-actions">
+            <button class="btn btn-warning" @onclick="StartEdit">✏️ ویرایش</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string TypeName { get; set; } = string.Empty;
+    [Parameter] public List<string> Items { get; set; } = new();
+    [Parameter] public EventCallback<List<string>> OnSave { get; set; }
+
+    private bool IsEditing = false;
+    private List<string> EditingItems = new();
+
+    protected override void OnParametersSet()
+    {
+        if (!IsEditing)
+        {
+            if (EditingItems.Count != Items.Count || !EditingItems.SequenceEqual(Items))
+            {
+                EditingItems = Items.ToList();
+            }
+        }
+    }
+
+    private void StartEdit()
+    {
+        EditingItems = Items.ToList();
+        IsEditing = true;
+    }
+
+    private void CancelEdit()
+    {
+        IsEditing = false;
+        EditingItems = Items.ToList(); // بازگشت به حالت اولیه
+    }
+
+    private void UpdateItem(int index, string value)
+    {
+        if (index >= 0 && index < EditingItems.Count)
+        {
+            EditingItems[index] = value;
+        }
+    }
+
+    private async Task SaveChanges()
+    {
+        if (EditingItems.Any(string.IsNullOrWhiteSpace))
+        {
+            // می‌توانید پیام خطا نمایش دهید
+            return;
+        }
+
+        await OnSave.InvokeAsync(EditingItems);
+        IsEditing = false;
+        EditingItems = Items.ToList(); // همگام‌سازی با آیتم‌های جدید (والد آنها را به‌روز کرده)
+    }
+}

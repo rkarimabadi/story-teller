@@ -1,0 +1,106 @@
+﻿.table-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-right: 6px solid var(--primary-color);
+    min-height: 250px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed #eee;
+}
+
+    .table-header h3 {
+        font-size: 1.2rem;
+        color: var(--dark-color);
+        margin: 0;
+    }
+
+.badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.items-list-display {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+    .items-list-display li {
+        padding: 0.5rem 0.75rem;
+        margin: 0.25rem 0;
+        background: rgba(108, 92, 231, 0.05);
+        border-radius: 10px;
+        border-right: 3px solid var(--secondary-color);
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+
+        .items-list-display li:hover {
+            background: rgba(108, 92, 231, 0.1);
+            transform: translateX(-5px);
+        }
+
+.edit-mode .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.item-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.item-index {
+    width: 28px;
+    height: 28px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.item-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: rgba(255,255,255,0.8);
+}
+
+    .item-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+.edit-actions, .card-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+    .card-actions .btn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.85rem;
+    }

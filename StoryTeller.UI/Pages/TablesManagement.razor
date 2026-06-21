@@ -1,0 +1,57 @@
+﻿@page "/tables"
+@using StoryTeller.UI.Application
+@using StoryTeller.UI.Components
+@inject IMediator Mediator
+
+<div class="container">
+    <div class="page-header flex flex-center" style="justify-content: space-between;">
+        <h2>📋 مدیریت جداول</h2>
+        <button class="btn btn-success" @onclick="ResetToDefault">↩️ بازنشانی به پیش‌فرض</button>
+    </div>
+
+    @if (Tables == null || !Tables.Any())
+    {
+        <div class="loading-state">در حال بارگذاری جداول...</div>
+    }
+    else
+    {
+        <div class="grid-3 mt-2">
+            @foreach (var table in Tables)
+            {
+                <TableCard Title="@table.Name"
+                           TypeName="@table.Type"
+                           Items="@table.Items"
+                           OnSave="(newItems) => UpdateTable(table.Id, newItems)" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<TableReadDto>? Tables = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTables();
+    }
+
+    private async Task LoadTables()
+    {
+        var query = new GetAllTablesQuery();
+        Tables = (await Mediator.Send(query)).ToList();
+    }
+
+    private async Task UpdateTable(Guid id, List<string> newItems)
+    {
+        var command = new UpdateTableCommand(id, newItems);
+        await Mediator.Send(command);
+        await LoadTables(); // بازخوانی
+    }
+
+    private async Task ResetToDefault()
+    {
+        var command = new SeedDefaultTablesCommand();
+        await Mediator.Send(command);
+        await LoadTables();
+    }
+}

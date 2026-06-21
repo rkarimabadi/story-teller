@@ -1,0 +1,37 @@
+﻿<div class="dice-container @(IsRolling ? "rolling" : "")" @onclick="OnRoll">
+    <div class="dice">
+        <div class="dice-face">
+            @if (IsRolling)
+            {
+                <span class="dice-number">?</span>
+            }
+            else
+            {
+                <span class="dice-number">@Value</span>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public int Value { get; set; } = 1;
+    [Parameter] public EventCallback<int> ValueChanged { get; set; }
+    [Parameter] public bool IsRolling { get; set; } = false;
+
+    private async Task OnRoll()
+    {
+        if (IsRolling) return;
+        IsRolling = true;
+
+        var random = new Random();
+        for (int i = 0; i < 8; i++)
+        {
+            Value = random.Next(1, 7);
+            await ValueChanged.InvokeAsync(Value);
+            StateHasChanged();
+            await Task.Delay(80);
+        }
+
+        IsRolling = false;
+    }
+}

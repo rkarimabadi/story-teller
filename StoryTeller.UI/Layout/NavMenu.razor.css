@@ -1,0 +1,32 @@
+﻿.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+    .nav-link:hover {
+        background: rgba(255,255,255,0.15);
+        transform: translateX(-5px);
+    }
+
+    .nav-link.active {
+        background: rgba(255,255,255,0.25);
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+.icon {
+    font-size: 1.2rem;
+}
